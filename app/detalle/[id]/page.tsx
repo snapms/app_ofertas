@@ -1,4 +1,4 @@
-import DATA from "../../../data/data.json";
+
 
 
 export default function Page({ params }: { params: { id: string } }) {

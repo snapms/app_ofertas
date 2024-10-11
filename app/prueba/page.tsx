@@ -5,16 +5,15 @@ import DATA from '../../data/data.json';
 
 async function getData(): Promise<Payment[]> {
 
-    const data_tabla: [] = DATA.map(({ oferta, Id }) => {
+    const data_tabla: Payment[] = DATA.map(({ oferta, Id }) => {
         return {
-            id : Id,
-            empresa : oferta,
-            postular: oferta,
-            tipo_de_cargo: oferta,
-            ubicacion: oferta
-        }
-    })
-
+          id: Id,
+          empresa: oferta,
+          postular: oferta,
+          tipo_de_cargo: oferta,
+          ubicacion: oferta
+        };
+      });
     return data_tabla
 }
 
