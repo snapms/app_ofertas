@@ -4,8 +4,7 @@ import JobDetailPage from "./job-detail-page";
 export default async function Page({ params }: { params: { id: string } }) {
     // Fetch the jobs data from the CSV
     const response = await fetch(
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjfMrMzIfokjzMLiVIbLZsTlGBHUDBqQ1xSHAeX_lAnNqIpCvRrs3RhYcyQT-s0g/pub?output=csv"
-    ).then((res) => res.text());
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQgn_9HO-_hTGCGpfEjbgQ57kx3vS2Wcr9SraS7XICQ7WOiznH34cY7v0C8T47Cyw/pub?output=csv"    ).then((res) => res.text());
 
     // Parse the CSV data
     const jobs_list: JobData[] = response

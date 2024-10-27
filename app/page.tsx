@@ -3,8 +3,7 @@ import HomeTable from "./home-table";
 
 export default async function Home() {
     const response = await fetch(
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjfMrMzIfokjzMLiVIbLZsTlGBHUDBqQ1xSHAeX_lAnNqIpCvRrs3RhYcyQT-s0g/pub?output=csv"
-    ).then((res) => res.text());
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQgn_9HO-_hTGCGpfEjbgQ57kx3vS2Wcr9SraS7XICQ7WOiznH34cY7v0C8T47Cyw/pub?output=csv"    ).then((res) => res.text());
 
     const jobs_list: JobData[] = response
         .split("\n")
