@@ -1,6 +1,75 @@
+import { JobData } from "@/interfaces/jobData";
+import JobDetailPage from "./job-detail-page";
 
+export default async function Page({ params }: { params: { id: string } }) {
+    // Fetch the jobs data from the CSV
+    const response = await fetch(
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQjfMrMzIfokjzMLiVIbLZsTlGBHUDBqQ1xSHAeX_lAnNqIpCvRrs3RhYcyQT-s0g/pub?output=csv"
+    ).then((res) => res.text());
 
+    // Parse the CSV data
+    const jobs_list: JobData[] = response
+        .split("\n")
+        .slice(1)
+        .map((row) => {
+            const [
+                correlativo,
+                id_job,
+                titulo_oferta,
+                creacion,
+                publicacion,
+                fecha,
+                id_empresa,
+                nombre_empresa,
+                empresa,
+                rubro,
+                fono,
+                mail_contacto,
+                area_de_trabajo,
+                tipo_de_cargo,
+                modalidad,
+                region,
+                comuna,
+                inclusiva,
+                sueldo,
+                postulantes,
+                oferta,
+                link,
+            ] = row.split(",").map((field) => field.replace(/;/g, ","));
 
-export default function Page({ params }: { params: { id: string } }) {
-    return <h1>My Page id { params.id }</h1>
-  }
+            return {
+                correlativo,
+                id_job,
+                titulo_oferta,
+                creacion,
+                publicacion,
+                fecha,
+                id_empresa,
+                nombre_empresa,
+                empresa,
+                rubro,
+                fono,
+                mail_contacto,
+                area_de_trabajo,
+                tipo_de_cargo,
+                modalidad,
+                region,
+                comuna,
+                inclusiva,
+                sueldo,
+                postulantes,
+                oferta,
+                link,
+            };
+        });
+
+    // Find the job that matches the correlativo with the id from params
+    const job = jobs_list.find((job) => job.correlativo === params.id);
+
+    // Check if job is found
+    if (!job) {
+        return <div>No se encontró la oferta de trabajo.</div>;
+    }
+
+    return <JobDetailPage job={job} />;
+}
